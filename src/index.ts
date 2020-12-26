@@ -74,28 +74,40 @@ window.addEventListener("DOMContentLoaded", () =>
   // 3D空間に適当にオブジェクトを配置
 
   // 球体を何個か作成
-  scene.add(createSpehre(new THREE.Vector3(-5, 0, 0), 0xfff000));
-  scene.add(createSpehre(new THREE.Vector3(-5, 500, -2000), 0xff0000));
+  scene.add(createSpehre(new THREE.Vector3(  -5,     0,     0), 0xfff000));
+  scene.add(createSpehre(new THREE.Vector3(  -5,   500, -2000), 0xff0000));
+  scene.add(createSpehre(new THREE.Vector3(-500,     0, -3000), 0x00ff00));
+  scene.add(createSpehre(new THREE.Vector3( 500,     0, -4000), 0x0000ff));
+  scene.add(createSpehre(new THREE.Vector3(   0, -2000, -5000), 0x00ffff));
 
   //---------------------------------------------------------------------------
   // カメラを動かすアニメーションデータを用意
-  const lastFrame = 200;
+  const lastFrame = 600;
 
   // カメラのポジションに関するアニメーションデータ
   // [keyframe, x, y, z]
   const positions = [
-    [0        , 0,    0,  1000],
-    [100      , 0,  500,   100], 
-    [lastFrame, 0, 1000, -1900]
+    [0        ,    0,     0,  1000],
+    [100      ,    0,   500,   100], 
+    [200      ,    0,  1000, -1500],
+    [300      , -500,     0, -2500],
+    [400      ,  500,     0, -3500],
+    [450      ,    0,     0, -5000],
+    [500      ,    0, -1500, -5000],
+    [lastFrame,    0,     0, -5000]
   ];
 
   // カメラの回転に関するアニメーションデータ  
-  // [keyframe, rotX]
+  // [keyframe, rotation.x]
   const rotations = [
-    [0  , 0],
-    [100, -1],
-    [170, 0],
-    [lastFrame, -1.5],
+    [0  ,    0],
+    [100,   -1],
+    [170,    0],
+    [200,   -1],
+    [300,    0],
+    [400,    0],
+    [500,   -Math.PI / 2],
+    [lastFrame, Math.PI],
   ];
 
   // アニメーショントラックを作成(再生用のデータ)
@@ -151,7 +163,7 @@ window.addEventListener("DOMContentLoaded", () =>
 
     // スクロール量をそのままkeyframeとして使ってしまうと動きがカクカクするので
     // 現在のkeyframeからscrollに向かって滑らかに数値が変化するように補間処理をする。
-    keyframe = keyframe + (scroll - keyframe) * 0.01;
+    keyframe = keyframe + (scroll - keyframe) * 0.05;
     mixer.setTime(keyframe);
 
     // 描画
