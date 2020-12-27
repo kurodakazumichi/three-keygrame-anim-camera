@@ -90,6 +90,8 @@ window.addEventListener("DOMContentLoaded", () =>
 
   //---------------------------------------------------------------------------
   // カメラを動かすアニメーションデータを用意
+  // 参考：https://qiita.com/Arihi/items/a3c12df16f1976221dbd
+  //     ：https://threejs.org/docs/index.html#api/en/animation/KeyframeTrack
   const lastFrame = 600;
 
   // カメラのポジションに関するアニメーションデータ
@@ -128,7 +130,7 @@ window.addEventListener("DOMContentLoaded", () =>
   const clip = new THREE.AnimationClip("camera animation", lastFrame, tracks);
 
   // Mixerにアニメーションさせる対象、ここではカメラを設定し
-  // 予め用意しておいてアニメーションクリップを設定して再生
+  // 予め用意しておいてアニメーションクリップ（CD)を設定して再生
   const mixer = new THREE.AnimationMixer(camera);
   mixer.clipAction(clip).play();
 
@@ -169,7 +171,7 @@ window.addEventListener("DOMContentLoaded", () =>
   {
     requestAnimationFrame(tick);
 
-    // スクロール量をそのままkeyframeとして使ってしまうと動きがカクカクするので
+    // keyframe = scroll としてしまうと動きがカクカクするので
     // 現在のkeyframeからscrollに向かって滑らかに数値が変化するように補間処理をする。
     keyframe = keyframe + (scroll - keyframe) * 0.05;
     mixer.setTime(keyframe);

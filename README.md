@@ -37,7 +37,7 @@ yarn watch
 root
  - dist ... webpackによってビルドされたモノが入るところ
  - src
-    - index.ts ... メインの処理が書かれてるファイル
+  - index.ts ... メインの処理が書かれてるファイル
  - index.html ... このファイルをブラウザで開けば動作確認可能
  - package.json
  - README.md ... お読みください
