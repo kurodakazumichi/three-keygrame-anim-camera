@@ -5,16 +5,20 @@ import * as THREE from "three";
  * @param pos 配置する座標
  * @param color 球の色(16進数で指定)
  */
-const createSpehre = (pos:THREE.Vector3, color:number) => {
+const createSphere = (pos:THREE.Vector3, color:number) => {
   const geometry = new THREE.SphereGeometry(100, 100, 100);
   const material = new THREE.MeshPhongMaterial({ color });
-  const box = new THREE.Mesh(geometry, material);
-  box.position.x = pos.x;
-  box.position.y = pos.y;
-  box.position.z = pos.z;
-  return box;
+  const sphere = new THREE.Mesh(geometry, material);
+  sphere.position.x = pos.x;
+  sphere.position.y = pos.y;
+  sphere.position.z = pos.z;
+  return sphere;
 }
 
+/**
+ * ポジションを制御するためのキーフレームアニメーションデータをもとにTruckを生成する
+ * @param positions キーフレームとそのキーフレームの時の座標リスト
+ */
 const createKeyFrameTruckForPosition = (positions:number[][]) => {
   const keys:number[] = [];
   const datas:number[] = [];
@@ -27,6 +31,10 @@ const createKeyFrameTruckForPosition = (positions:number[][]) => {
   return new THREE.VectorKeyframeTrack(".position", keys, datas, THREE.InterpolateLinear);
 }
 
+/**
+ * 回転を制御するためのキーフレームアニメーションデータをもとにTruckを生成する
+ * @param rotations キーフレームとそのキーフレーム時のX軸回転量のリスト
+ */
 const createKeyFrameTruckForRotation = (rotations:number[][]) => {
   const keys:number[] = [];
   const datas:number[] = [];
@@ -74,11 +82,11 @@ window.addEventListener("DOMContentLoaded", () =>
   // 3D空間に適当にオブジェクトを配置
 
   // 球体を何個か作成
-  scene.add(createSpehre(new THREE.Vector3(  -5,     0,     0), 0xfff000));
-  scene.add(createSpehre(new THREE.Vector3(  -5,   500, -2000), 0xff0000));
-  scene.add(createSpehre(new THREE.Vector3(-500,     0, -3000), 0x00ff00));
-  scene.add(createSpehre(new THREE.Vector3( 500,     0, -4000), 0x0000ff));
-  scene.add(createSpehre(new THREE.Vector3(   0, -2000, -5000), 0x00ffff));
+  scene.add(createSphere(new THREE.Vector3(  -5,     0,     0), 0xfff000));
+  scene.add(createSphere(new THREE.Vector3(  -5,   500, -2000), 0xff0000));
+  scene.add(createSphere(new THREE.Vector3(-500,     0, -3000), 0x00ff00));
+  scene.add(createSphere(new THREE.Vector3( 500,     0, -4000), 0x0000ff));
+  scene.add(createSphere(new THREE.Vector3(   0, -2000, -5000), 0x00ffff));
 
   //---------------------------------------------------------------------------
   // カメラを動かすアニメーションデータを用意
